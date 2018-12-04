@@ -1,0 +1,32 @@
+{
+  "name": "gameinfo",
+  "version": "1.0.0",
+  "description": "assesment client side development",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose-autopopulate": "^0.9.0",
+    "mongoose": "^5.3.14",
+    "neo4j-driver": "^1.7.2",
+    "nodemon": "^1.18.7",
+    "supertest": "^3.3.0"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "SET NODE_ENV=testEnv| nodemon --exec mocha --recursive",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wjagottm/gameinfo.git"
+  },
+  "author": "Arantxio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wjagottm/gameinfo/issues"
+  },
+  "homepage": "https://github.com/wjagottm/gameinfo#readme"
+}
