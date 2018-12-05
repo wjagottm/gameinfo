@@ -9,6 +9,12 @@ module.exports = {
             .catch(next);
     },
 
+    getAll(req, res, next) {
+        Developer.findMany()
+            .then((game) => res.send(game))
+            .catch(next);
+    },
+
     create(req, res, next) {
         const developerProps = req.body;
 

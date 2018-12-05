@@ -8,11 +8,11 @@ const DeveloperSchema = new Schema({
     },
     country: String,
     est: Number,
-    games: {
+    games: [{
         type: Schema.Types.ObjectId,
         ref: 'games',
         autopopulate: true
-    },
+    }],
     logoUrl: String
 })
 

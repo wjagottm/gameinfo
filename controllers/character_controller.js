@@ -9,6 +9,20 @@ module.exports = {
             .catch(next);
     },
 
+    getAll(req, res, next) {
+        Character.findMany()
+            .then((game) => res.send(game))
+            .catch(next);
+    },
+
+    getByGame(req, res, next) {
+        const game = req.params.id;
+
+        Character.findMany({ game: game})
+            .then((character) => res.send(character))
+            .catch(next);
+    },
+
     create(req, res, next) {
         const characterProps = req.body;
 

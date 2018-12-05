@@ -9,6 +9,7 @@ const CharacterSchema = new Schema({
     description: String,
     weapons: [String],
     abilities: [String],
+    game: String,
     imageUrl: String
 })
 

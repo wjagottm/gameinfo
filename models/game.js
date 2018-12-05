@@ -15,11 +15,12 @@ const GameSchema = new Schema({
         max: 5 
     }],
     released: Date,
-    characters: {
+    characters: [{
         type: Schema.Types.ObjectId,
         ref: 'character',
         autopopulate: true
-    },
+    }],
+    developer: String,
     imageUrl: String
 })
 
