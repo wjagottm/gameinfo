@@ -10,7 +10,7 @@ module.exports = {
     },
 
     getAll(req, res, next) {
-        Game.findMany()
+        Game.find()
             .then((game) => res.send(game))
             .catch(next);
     },
@@ -18,7 +18,7 @@ module.exports = {
     getByDev(req, res, next) {
         const developer = req.params.id;
 
-        Game.findMany({ developer: developer})
+        Game.find({ developer: developer})
             .then((game) => res.send(game))
             .catch(next);
     },
@@ -30,6 +30,22 @@ module.exports = {
             .then(() => Game.findOne({ name: gameProps.name}))
             .then((game) => res.send(game))
             .catch(next);
+    },
+
+    addCharToGame(req, res, next) {
+        const gameId = req.params.id;
+        const charProps = req.body;
+
+        Game.findById({_id: gameId})
+            .then(game => {
+                game.characters.push(charProps._id)
+                game.save()
+                    .then(() => Game.findById({ _id: gameId}))
+                    .then(game => res.send(game))
+                    .catch(next)
+            })
+            .catch(next);
+
     },
 
     edit(req, res, next) {

@@ -7,10 +7,10 @@ const DeveloperSchema = new Schema({
         required: true
     },
     country: String,
-    est: Number,
+    est: Date,
     games: [{
         type: Schema.Types.ObjectId,
-        ref: 'games',
+        ref: 'game',
         autopopulate: true
     }],
     logoUrl: String

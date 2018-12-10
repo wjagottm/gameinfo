@@ -10,7 +10,7 @@ module.exports = {
     },
 
     getAll(req, res, next) {
-        Character.findMany()
+        Character.find()
             .then((game) => res.send(game))
             .catch(next);
     },
@@ -18,7 +18,7 @@ module.exports = {
     getByGame(req, res, next) {
         const game = req.params.id;
 
-        Character.findMany({ game: game})
+        Character.find({ game: game})
             .then((character) => res.send(character))
             .catch(next);
     },

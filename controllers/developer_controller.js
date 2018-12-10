@@ -5,12 +5,12 @@ module.exports = {
         const developerId = req.params.id;
 
         Developer.findById({ _id: developerId})
-            .them((developer) => res.send(developer))
+            .then((developer) => res.send(developer))
             .catch(next);
     },
 
     getAll(req, res, next) {
-        Developer.findMany()
+        Developer.find()
             .then((game) => res.send(game))
             .catch(next);
     },
@@ -21,6 +21,21 @@ module.exports = {
         Developer.create(developerProps)
             .then(() => Developer.findOne({ name: developerProps.name}))
             .then((developer) => res.send(developer))
+            .catch(next);
+    },
+
+    addGameToDev(req, res, next) {
+        const developerId = req.params.id;
+        const gameProps = req.body;
+
+        Developer.findById({_id: developerId})
+            .then(developer => {
+                developer.games.push(gameProps._id)
+                developer.save()
+                    .then(() => Developer.findById({ _id: developerId}))
+                    .then(developer => res.send(developer))
+                    .catch(next)
+            })
             .catch(next);
     },
 

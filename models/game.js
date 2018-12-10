@@ -20,7 +20,11 @@ const GameSchema = new Schema({
         ref: 'character',
         autopopulate: true
     }],
-    developer: String,
+    developer: [{
+        type: Schema.Types.ObjectId,
+        ref: 'developer',
+        autopopulate: true
+    }],
     imageUrl: String
 })
 
