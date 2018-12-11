@@ -56,7 +56,7 @@ module.exports = {
         Developer.deleteOne({ _id: developerId })
             .then(() => Game.find({ developer: developerId })
                 .then((games) => {
-                    if( games.length() >= 0) {
+                    if( games.count() >= 0) {
                         games.forEach(function (gameObj) {
                             Character.deleteMany({ game: gameObj._id })
                                 .then(() => Game.deleteMany({ developer: developerId }))
@@ -67,5 +67,6 @@ module.exports = {
                         res.status(200).send();
                     }
                 }))
+                .catch(next);
     }
 }
