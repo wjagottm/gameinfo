@@ -1,10 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+var cors = require('cors');
 const routes = require('./routes/routes');
 var jwt = require('jsonwebtoken');
 
 const app = express();
+
+app.use(cors());
 
 app.set('secretKey', 'nodeRestApi'); // jwt secret token
 
@@ -34,19 +37,6 @@ if (process.env.NODE_ENV !== 'testENV') {
             console.warn('Warning', err);
         });
 }
-
-app.all("/*", function (req, res, next) {
-
-  res.header("Access-Control-Allow-Origin", req.headers.origin);
-  res.header("Access-Control-Allow-Credentials",true);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type,Accept,X-Access-Token,X-Key,Authorization,X-Requested-With,Origin,Access-Control-Allow-Origin,Access-Control-Allow-Credentials');
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-  } else {
-    next();
-  }
-});
 
 routes(app);
 
