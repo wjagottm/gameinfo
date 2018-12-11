@@ -1,4 +1,6 @@
 const Developer = require('../models/developer');
+const Game = require('../models/game');
+const Character = require('../models/character');
 
 module.exports = {
     get(req, res, next) {
@@ -50,6 +52,15 @@ module.exports = {
 
     delete(req, res, next) {
         const developerId = req.params.id;
+
+        Game.findMany({ developer: developerId})
+        .then((games) => {
+            for (const gameObj in games) {
+                Character.deleteMany({ game: gameObj._id})
+                .then(() => Game.deleteMany({ developer: developerId}))
+                .then(() => next())
+            }
+        })
 
         Developer.deleteOne({ _id: developerId})
             .then(() => res.status(200).send())
