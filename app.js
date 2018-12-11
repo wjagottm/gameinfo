@@ -32,6 +32,7 @@ if (process.env.NODE_ENV !== 'testENV') {
         });
 }
 
+app.use(express.bodyParser({limit: '50mb'}));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "*");
