@@ -16,7 +16,7 @@ const DeveloperSchema = new Schema({
     logoUrl: String
 })
 
-DeveloperSchema.pre('remove', function(next) {
+DeveloperSchema.pre('remove', { query: true, doc: true }, function(next) {
     const Game = mongoose.model('game');
     const Character = mongoose.model('character');
 
