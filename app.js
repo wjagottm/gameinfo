@@ -8,6 +8,9 @@ const app = express();
 
 app.set('secretKey', 'nodeRestApi'); // jwt secret token
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+
 mongoose.Promise = global.Promise;
 mongoose.set('useFindAndModify', false);
 
@@ -35,11 +38,9 @@ if (process.env.NODE_ENV !== 'testENV') {
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "*");
-    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+    res.header('Access-Control-Allow-Methods', '*');
     next();
 });
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 
 routes(app);
 
