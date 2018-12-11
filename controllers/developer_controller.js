@@ -53,17 +53,15 @@ module.exports = {
     delete(req, res, next) {
         const developerId = req.params.id;
 
-        Game.findMany({ developer: developerId})
+        Game.find({ developer: developerId})
         .then((games) => {
             for (const gameObj in games) {
                 Character.deleteMany({ game: gameObj._id})
                 .then(() => Game.deleteMany({ developer: developerId}))
-                .then(() => next())
+                .then(() => Developer.deleteOne({ _id: developerId}))
+                .then(() => res.status(200).send())
+                .catch(next);
             }
         })
-
-        Developer.deleteOne({ _id: developerId})
-            .then(() => res.status(200).send())
-            .catch(next);
     }
 }
