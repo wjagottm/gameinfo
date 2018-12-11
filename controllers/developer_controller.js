@@ -56,12 +56,16 @@ module.exports = {
         Developer.deleteOne({ _id: developerId })
             .then(() => Game.find({ developer: developerId })
                 .then((games) => {
-                    games.forEach(function (gameObj) {
-                        Character.deleteMany({ game: gameObj._id })
-                            .then(() => Game.deleteMany({ developer: developerId }))
-                            .then(() => res.status(200).send())
-                            .catch(next);
-                    })
+                    if( games.length() >= 0) {
+                        games.forEach(function (gameObj) {
+                            Character.deleteMany({ game: gameObj._id })
+                                .then(() => Game.deleteMany({ developer: developerId }))
+                                .then(() => res.status(200).send())
+                                .catch(next);
+                        })
+                    } else {
+                        res.status(200).send();
+                    }
                 }))
     }
 }
