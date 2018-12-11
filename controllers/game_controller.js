@@ -1,4 +1,5 @@
 const Game = require('../models/Game');
+const Character = require('../models/character');
 
 module.exports = {
     get(req, res, next) {
@@ -61,6 +62,7 @@ module.exports = {
         const gameId = req.params.id;
 
         Game.findOneAndDelete({ _id: gameId})
+            .then(() => Character.deleteMany({ game: gameId}))
             .then(() => res.status(200).send())
             .catch(next);
     }

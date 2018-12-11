@@ -2,8 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const routes = require('./routes/routes');
+var jwt = require('jsonwebtoken');
 
 const app = express();
+
+app.set('secretKey', 'nodeRestApi'); // jwt secret token
 
 mongoose.Promise = global.Promise;
 mongoose.set('useFindAndModify', false);
@@ -31,11 +34,12 @@ if (process.env.NODE_ENV !== 'testENV') {
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "*");
     res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
     next();
 });
 app.use(bodyParser.json());
+
 routes(app);
 
 app.use((err, req, res, next) => {

@@ -51,7 +51,7 @@ module.exports = {
     delete(req, res, next) {
         const developerId = req.params.id;
 
-        Developer.findOneAndDelete({ _id: developerId})
+        Developer.deleteOne({ _id: developerId})
             .then(() => res.status(200).send())
             .catch(next);
     }

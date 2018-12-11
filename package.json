@@ -4,10 +4,12 @@
   "description": "assesment client side development",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "mongoose-autopopulate": "^0.9.0",
+    "jsonwebtoken": "^8.4.0",
     "mongoose": "^5.3.14",
+    "mongoose-autopopulate": "^0.9.0",
     "neo4j-driver": "^1.7.2",
     "nodemon": "^1.18.7",
     "supertest": "^3.3.0"
