@@ -39,7 +39,7 @@ app.use(function(req, res, next) {
     next();
 });
 app.use(bodyParser.json());
-app.use(express.bodyParser({limit: '50mb'}));
+app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
 
 routes(app);
 
