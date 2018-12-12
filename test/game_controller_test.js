@@ -5,10 +5,12 @@ const app = require('../app');
 
 const Game = mongoose.model('game');
 const Developer = mongoose.model('developer');
+const Character = mongoose.model('character');
 
 let dev;
 let game;
-let authToken;
+let char;
+let authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjMTE0MDBmNDc5NzljMDAxNjI4MTczZSIsImlhdCI6MTU0NDYzNDM5NSwiZXhwIjoxNTQ0NjYzMTk1fQ.2vtoaIR5l68xsBxxJGTcdOriL8bWURj2elNch_O0ias";
 
 beforeEach((done) => {
     dev = new Developer({ name: 'test'})
@@ -17,7 +19,9 @@ beforeEach((done) => {
             game = new Game({ name: "test", developer: dev._id})
             game.save()
                 .then(() => {
-                    done();
+                    char = new Character({ name: "test", game: game._id})
+                    char.save()
+                        .then(() => done())
                 })
         })
 })
@@ -54,7 +58,7 @@ describe('Game controller', () => {
                 });
         });
     });
-    it('Delete to /api/thread/:id to delete a thread', (done) => {
+    it('Delete to /api/game/:id to delete a game', (done) => {
         const game2 = new Game({ name: "testGame", developer: dev._id});
         game2.save().then(() => {
             request(app)
